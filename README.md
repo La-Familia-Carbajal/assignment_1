@@ -1,5 +1,4 @@
-# assignment_1
-Assignment #1
+# Assignment #1
 
 Create a simple website that retrieves and displays data from the Northwind database.
 
