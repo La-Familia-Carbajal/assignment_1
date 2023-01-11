@@ -5,17 +5,19 @@ namespace NorthwindProject.Models
 {
     public class DbConnector
     {
-        private static AppSettings _settings;
+        private static AppSettings? _settings;
 
         public static void Initialize(AppSettings appSettings)
         {
             _settings = appSettings;
         }
-        public static SqlConnection GetServiceConnection()
+        public static SqlConnection? GetServiceConnection()
         {
-            //get connection to database
-            string connectionString = _settings.ConnectionStrings.Default;
-            return GetConnection(connectionString);
+            if (_settings == null)
+                return null;
+
+			//get connection to database
+            return GetConnection(_settings.ConnectionStrings.Default);
         }
 
         private static SqlConnection GetConnection(string connStr)

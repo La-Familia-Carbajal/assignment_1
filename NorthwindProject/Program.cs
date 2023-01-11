@@ -1,7 +1,16 @@
+using NorthwindProject.Models;
+using NorthwindProject.Configuration;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Add Razor Page functionality
+builder.Services.AddRazorPages();
+
+var appSettings = builder.Configuration.Get<AppSettings>();
+DbConnector.Initialize(appSettings);
 
 var app = builder.Build();
 
@@ -13,7 +22,6 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
@@ -23,5 +31,7 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapRazorPages();
 
 app.Run();

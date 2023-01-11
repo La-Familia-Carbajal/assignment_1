@@ -4,15 +4,9 @@
     {
         public class ConnectionStringSettings
         {
-            public string Default
-            {
-                get; set;
-            }
+            public string Default { get; set; } = string.Empty;
         }
-        
-        public ConnectionStringSettings ConnectionStrings
-        {
-            get; set;
-        }
+
+        public ConnectionStringSettings ConnectionStrings { get; set; } = new ConnectionStringSettings();
     }
 }
