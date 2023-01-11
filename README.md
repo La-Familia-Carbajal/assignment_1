@@ -20,4 +20,3 @@ Contact: Maria Anders, Sales Representative
 
 ### Things to keep in mind:
 - Try to use the ASP.NET tags in your HTML to get used to how they work and what the different tag attributes do
-- Be sure to use the `DataGrid` ASP.NET tag to display lists of items to learn how to bind data to a list
