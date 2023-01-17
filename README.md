@@ -3,7 +3,7 @@
 Create a simple website that retrieves and displays data from the Northwind database.
 
 ## Requirements:
-- [ ] Include separate header, body, and footer sections that are all put together through one `_layout.aspx` file.
+- [X] Include separate header, body, and footer sections that are all put together through one `_layout.aspx` file.
 - [ ] Header should include navigation to two destinations, Employees and Customer Orders
 
 ### Employees functionality:
