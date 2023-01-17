@@ -1,0 +1,33 @@
+﻿@model IEnumerable<NorthwindProject.Models.CustomerOrders>
+
+@{
+    ViewData["Title"] = "Customer Orders";
+}
+
+<h1>Customer Orders</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CompanyName)
+            </th>
+            <th>
+                Contact: @Html.DisplayNameFor(model => model.ContactName), @Html.DisplayNameFor(model => model.ContactTitle)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CompanyName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContactName), @Html.DisplayFor(modelItem => item.ContactTitle)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

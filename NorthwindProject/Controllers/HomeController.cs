@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NorthwindProject.Models;
+using NuGet.Protocol.Plugins;
 using System.Diagnostics;
 
 namespace NorthwindProject.Controllers
@@ -18,6 +19,7 @@ namespace NorthwindProject.Controllers
             return View();
         }
 
+        #region Employees
         public async Task<IActionResult> Employees()
         {
             List<Employee> Employees = new List<Employee>();
@@ -50,7 +52,46 @@ namespace NorthwindProject.Controllers
 
             return View(Employees);
         }
+        #endregion
 
+        #region Customer Orders
+        public async Task<IActionResult> CustomerOrder()
+        {
+            List<CustomerOrders> CustomerOrder = new List<CustomerOrders>();
+
+            try
+            {
+                using var conn = DbConnector.GetServiceConnection();
+                using var cmd = conn?.CreateCommand();
+
+                cmd.CommandText = "SELECT CompanyName, ContactName, ContactTitle FROM Customers";
+
+                using var sdr = cmd.ExecuteReader();
+                if (!sdr.HasRows)
+                {
+                    throw new Exception("No record found");
+                }
+                while(await sdr.ReadAsync())
+                {
+                    var customerOrders = new CustomerOrders
+                    {
+                        CompanyName = sdr.GetString(0),
+                        ContactName = sdr.GetString(1),
+                        ContactTitle = sdr.GetString(2)
+                    };
+
+                    CustomerOrder.Add(customerOrders);
+                }
+            }
+
+            catch(Exception exc)
+            {
+                _logger.LogError(exc.Message);
+            }
+
+            return View(CustomerOrder);
+        }
+        #endregion
         public IActionResult Privacy()
         {
             return View();
