@@ -55,9 +55,9 @@ namespace NorthwindProject.Controllers
         #endregion
 
         #region Customer Orders
-        public async Task<IActionResult> CustomerOrder()
+        public async Task<IActionResult> CustomerOrders()
         {
-            List<CustomerOrders> CustomerOrder = new List<CustomerOrders>();
+            List<CustomerOrders> CustomerOrders = new List<CustomerOrders>();
 
             try
             {
@@ -80,7 +80,7 @@ namespace NorthwindProject.Controllers
                         ContactTitle = sdr.GetString(2)
                     };
 
-                    CustomerOrder.Add(customerOrders);
+                    CustomerOrders.Add(customerOrders);
                 }
             }
 
@@ -89,7 +89,7 @@ namespace NorthwindProject.Controllers
                 _logger.LogError(exc.Message);
             }
 
-            return View(CustomerOrder);
+            return View(CustomerOrders);
         }
         #endregion
         public IActionResult Privacy()
