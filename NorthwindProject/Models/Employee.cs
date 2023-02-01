@@ -8,5 +8,5 @@ namespace NorthwindProject.Models
 		public string FirstName { get; set; } = string.Empty;
 		[DisplayName("Last Name")]
 		public string LastName { get; set; } = string.Empty;
-	}
+    }
 }

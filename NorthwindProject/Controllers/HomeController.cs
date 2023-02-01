@@ -42,6 +42,7 @@ namespace NorthwindProject.Controllers
                         FirstName = sdr.GetString(0),
                         LastName = sdr.GetString(1)
                     };
+                    Employees.Sort();
                     Employees.Add(employee);
                 }
             }
@@ -49,7 +50,7 @@ namespace NorthwindProject.Controllers
             {
                 _logger.LogError(exc.Message);
             }
-
+            
             return View(Employees);
         }
         #endregion
@@ -101,6 +102,11 @@ namespace NorthwindProject.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult Sophia(string id)
+        {
+            return View();
         }
     }
 }
