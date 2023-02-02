@@ -29,7 +29,7 @@ namespace NorthwindProject.Controllers
                 using var conn = DbConnector.GetServiceConnection();
                 using var cmd = conn?.CreateCommand();
 
-                cmd.CommandText = "SELECT FirstName, LastName FROM Employees";
+                cmd.CommandText = "SELECT FirstName, LastName FROM Employees ORDER BY LastName, FirstName";
 
                 using var sdr = cmd.ExecuteReader();
                 if (!sdr.HasRows)
@@ -42,7 +42,6 @@ namespace NorthwindProject.Controllers
                         FirstName = sdr.GetString(0),
                         LastName = sdr.GetString(1)
                     };
-                    Employees.Sort();
                     Employees.Add(employee);
                 }
             }
@@ -93,6 +92,7 @@ namespace NorthwindProject.Controllers
             return View(CustomerOrders);
         }
         #endregion
+        
         public IActionResult Privacy()
         {
             return View();
