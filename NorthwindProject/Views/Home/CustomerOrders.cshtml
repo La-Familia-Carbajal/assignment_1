@@ -13,7 +13,7 @@
             <tr>
                 <td>
                     @Html.ActionLink(item.CompanyName, "Sophia", "Home", new {id = item.CompanyName})<br />
-                    @Html.DisplayNameFor(model => model.ContactName) &#38; @Html.DisplayNameFor(model => model.ContactTitle): @Html.DisplayFor(modelItem => item.ContactName), @Html.DisplayFor(modelItem => item.ContactTitle)
+                    Contact: @Html.DisplayFor(modelItem => item.ContactName), @Html.DisplayFor(modelItem => item.ContactTitle)
                 </td>
             </tr>
         }

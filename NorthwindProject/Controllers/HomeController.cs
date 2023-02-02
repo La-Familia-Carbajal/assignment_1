@@ -29,7 +29,7 @@ namespace NorthwindProject.Controllers
                 using var conn = DbConnector.GetServiceConnection();
                 using var cmd = conn?.CreateCommand();
 
-                cmd.CommandText = "SELECT FirstName, LastName FROM Employees ORDER BY LastName, FirstName";
+                cmd.CommandText = "SELECT EmployeeID, FirstName, LastName FROM Employees ORDER BY LastName, FirstName";
 
                 using var sdr = cmd.ExecuteReader();
                 if (!sdr.HasRows)
@@ -39,8 +39,9 @@ namespace NorthwindProject.Controllers
                 {
                     var employee = new Employee
                     {
-                        FirstName = sdr.GetString(0),
-                        LastName = sdr.GetString(1)
+                        ID = sdr.GetInt32(0),
+                        FirstName = sdr.GetString(1),
+                        LastName = sdr.GetString(2)
                     };
                     Employees.Add(employee);
                 }
@@ -51,6 +52,16 @@ namespace NorthwindProject.Controllers
             }
             
             return View(Employees);
+        }
+
+        public async Task<IActionResult> EmployeeInfo(int id)
+        {
+            Employee employee = null;
+
+            // do the things to retrieve employee info and assign to Employee object
+            // SELECT EmployeeID, FirstName, LastName FROM Employees WHERE EmployeeID = {id}
+
+            return View(employee);
         }
         #endregion
 
