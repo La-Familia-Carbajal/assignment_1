@@ -29,7 +29,7 @@ namespace NorthwindProject.Controllers
                 using var conn = DbConnector.GetServiceConnection();
                 using var cmd = conn?.CreateCommand();
 
-                cmd.CommandText = "SELECT FirstName, LastName FROM Employees ORDER BY LastName, FirstName";
+                cmd.CommandText = "SELECT EmployeeID, FirstName, LastName FROM Employees ORDER BY LastName, FirstName";
 
                 using var sdr = cmd.ExecuteReader();
                 if (!sdr.HasRows)
@@ -39,8 +39,9 @@ namespace NorthwindProject.Controllers
                 {
                     var employee = new Employee
                     {
-                        FirstName = sdr.GetString(0),
-                        LastName = sdr.GetString(1)
+                        EmployeeID = sdr.GetInt32(0),
+                        FirstName = sdr.GetString(1),
+                        LastName = sdr.GetString(2)
                     };
                     Employees.Add(employee);
                 }
@@ -50,7 +51,52 @@ namespace NorthwindProject.Controllers
                 _logger.LogError(exc.Message);
             }
             
-            return View(Employees);
+            return View(Employees);        }
+
+        public async Task<IActionResult> EmployeeInfo(int id)
+        {
+            Employee employee = null;
+
+            try
+            {
+                using var conn = DbConnector.GetServiceConnection();
+                using var cmd = conn?.CreateCommand();
+
+                cmd.CommandText = "SELECT EmployeeID, FirstName, LastName FROM Employees WHERE EmployeeID = {id}";
+
+                using var sdr = cmd.ExecuteReader();
+                if(!sdr.HasRows)
+                    throw new Exception("No records found.");
+
+                while (await sdr.ReadAsync())
+                {
+                    employee = new Employee
+                    {
+                        EmployeeID = sdr.GetInt32(0),
+                        FirstName = sdr.GetString(1),
+                        LastName = sdr.GetString(2),
+                        Title = sdr.GetString(3),
+                        TitleOfCourtesy = sdr.GetString(4),
+                        BirthDate = sdr.GetDateTime(5),
+                        HireDate = sdr.GetDateTime(6),
+                        Address = sdr.GetString(7),
+                        City = sdr.GetString(8),
+                        Region = sdr.GetString(9),
+                        PostalCode = sdr.GetString(10),
+                        Country = sdr.GetString(11),
+                        HomePhone = sdr.GetInt32(12),
+                        Extension = sdr.GetInt32(13),
+                        Notes = sdr.GetString(14),
+                        ReportsTo = sdr.GetInt32(15)
+                    };
+                }
+            }
+            catch (Exception exc)
+            {
+                _logger.LogError(exc.Message);
+            }
+
+            return View(employee);
         }
         #endregion
 
