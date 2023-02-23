@@ -1,4 +1,4 @@
-﻿@model IEnumerable<NorthwindProject.Models.Employee>
+﻿@model NorthwindProject.Models.Employee
 
 @{
     ViewData["Title"] = "Employee Info";
@@ -6,86 +6,102 @@
 
 <h1>Employee Information</h1>
 <table class="table">
-        <thead>
+        <tbody>
             <tr>
                 <th>
                     @Html.DisplayNameFor(model => model.EmployeeID)
                 </th>
+                <td>@Model.EmployeeID</td>
             </tr>
             <tr>
                 <th>
                     @Html.DisplayNameFor(model => model.TitleOfCourtesy)
                 </th>
+                <td>@Model.TitleOfCourtesy</td>
             </tr>
             <tr>
                 <th>
                     @Html.DisplayNameFor(model => model.FirstName)
-                </th>
+            </th>
+            <td>@Model.FirstName</td>
             </tr>
             <tr>
                 <th>
                     @Html.DisplayNameFor(model => model.LastName)
-                </th>
+            </th>
+            <td>@Model.LastName</td>
             </tr>
             <tr>
                 <th>
                     @Html.DisplayNameFor(model => model.Title)
-                </th>
+            </th>
+            <td>@Model.Title</td>
             </tr>
             <tr>
                 <th>
                     @Html.DisplayNameFor(model => model.BirthDate)
-                </th>
+            </th>
+            <td>@Model.BirthDate</td>
             </tr>
             <tr>
                 <th>
                     @Html.DisplayNameFor(model => model.HireDate)
-                </th>
+            </th>
+            <td>@Model.HireDate</td>
             </tr>
             <tr>
                 <th>
                     @Html.DisplayNameFor(model => model.Address)
-                </th>
+            </th>
+            <td>@Model.Address</td>
             </tr>
             <tr>
                 <th>
                     @Html.DisplayNameFor(model => model.City)
-                </th>
+            </th>
+            <td>@Model.City</td>
             </tr>
             <tr>
                 <th>
                     @Html.DisplayNameFor(model => model.Region)
-                </th>
+            </th>
+            <td>@Model.Region</td>
             </tr>
             <tr>
                 <th>
                     @Html.DisplayNameFor(model => model.PostalCode)
                 </th>
+                <td>@Model.PostalCode</td>
             </tr>
             <tr>
                 <th>
                     @Html.DisplayNameFor(model => model.Country)
-                </th>
+            </th>
+            <td>@Model.Country</td>
             </tr>
             <tr>
                 <th>
                     @Html.DisplayNameFor(model => model.HomePhone)
                 </th>
+                <td>@Model.HomePhone</td>
             </tr>
             <tr>
                 <th>
                     @Html.DisplayNameFor(model => model.Extension)
-                </th>
+            </th>
+            <td>@Model.Extension</td>
             </tr>
             <tr>
                 <th>
                     @Html.DisplayNameFor(model => model.Notes)
-                </th>
+            </th>
+            <td>@Model.Notes</td>
             </tr>
             <tr>
                 <th>
                     @Html.DisplayNameFor(model => model.ReportsTo)
-                </th>
+            </th>
+            <td>@Model.ReportsTo</td>
             </tr>
-        </thead>
+        </tbody>
 </table>

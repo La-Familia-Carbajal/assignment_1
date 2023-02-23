@@ -29,9 +29,9 @@ namespace NorthwindProject.Models
         [DisplayName("Country")]
         public string Country { get; set; } = string.Empty;
         [DisplayName("Home Phone")]
-        public int HomePhone { get; set; }
+        public string HomePhone { get; set; } = string.Empty;
         [DisplayName("Ext.")]
-        public int Extension { get; set; }
+        public string Extension { get; set; } = string.Empty;
         [DisplayName("Notes")]
         public string Notes { get; set; } = string.Empty;
         [DisplayName("Reports To")]
