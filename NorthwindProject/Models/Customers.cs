@@ -2,7 +2,7 @@
 
 namespace NorthwindProject.Models
 {
-    public class CustomerOrders
+    public class Customers
     {
         public string CustomerID { get; set; } = string.Empty;
         [DisplayName("Company Name")]

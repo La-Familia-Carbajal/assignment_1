@@ -102,10 +102,10 @@ namespace NorthwindProject.Controllers
         }
         #endregion
 
-        #region Customer Orders
-        public async Task<IActionResult> CustomerOrders()
+        #region Customers
+        public async Task<IActionResult> Customers()
         {
-            List<CustomerOrders> CustomerOrders = new List<CustomerOrders>();
+            List<Customers> Customers = new List<Customers>();
 
             try
             {
@@ -121,7 +121,7 @@ namespace NorthwindProject.Controllers
                 }
                 while(await sdr.ReadAsync())
                 {
-                    var customerOrders = new CustomerOrders
+                    var customers = new Customers
                     {
                         CustomerID = sdr.GetString(0),
                         CompanyName = sdr.GetString(1),
@@ -129,7 +129,7 @@ namespace NorthwindProject.Controllers
                         ContactTitle = sdr.GetString(3)
                     };
 
-                    CustomerOrders.Add(customerOrders);
+                    Customers.Add(customers);
                 }
             }
 
@@ -138,7 +138,7 @@ namespace NorthwindProject.Controllers
                 _logger.LogError(exc.Message);
             }
 
-            return View(CustomerOrders);
+            return View(Customers);
         }
         #endregion
         
