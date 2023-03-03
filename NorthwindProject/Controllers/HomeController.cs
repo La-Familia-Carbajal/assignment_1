@@ -119,7 +119,7 @@ namespace NorthwindProject.Controllers
                 {
                     throw new Exception("No record found");
                 }
-                while(await sdr.ReadAsync())
+                while (await sdr.ReadAsync())
                 {
                     var customers = new Customers
                     {
@@ -133,13 +133,48 @@ namespace NorthwindProject.Controllers
                 }
             }
 
-            catch(Exception exc)
+            catch (Exception exc)
             {
                 _logger.LogError(exc.Message);
             }
 
             return View(Customers);
         }
+
+        public async Task<IActionResult> CustomerOrders(string id)
+        {
+            Customers customer = null;
+
+            try
+            {
+                using var conn = DbConnector.GetServiceConnection();
+                using var cmd = conn?.CreateCommand();
+
+                cmd.CommandText = "SELECT CustomerID, CompanyName, ContactName, ContactTitle FROM Customers";
+
+                using var sdr = cmd.ExecuteReader();
+                if (!sdr.HasRows)
+                    throw new Exception("No records found.");
+
+                await sdr.ReadAsync();
+
+                customer = new Customers
+                {
+                    CustomerID = sdr.GetString(0),
+                    CompanyName = sdr.GetString(1),
+                    ContactName = sdr.GetString(2),
+                    ContactTitle = sdr.GetString(3)
+                };
+            }
+
+            catch (Exception exc)
+            {
+                _logger.LogError(exc.Message);
+            }
+
+            return View(customer);
+        }
+
         #endregion
         
         public IActionResult Privacy()
