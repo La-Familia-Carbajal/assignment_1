@@ -150,7 +150,7 @@ namespace NorthwindProject.Controllers
                 using var conn = DbConnector.GetServiceConnection();
                 using var cmd = conn?.CreateCommand();
 
-                cmd.CommandText = "SELECT CustomerID, CompanyName, ContactName, ContactTitle FROM Customers";
+                cmd.CommandText = "SELECT CustomerID, CompanyName, ContactName, ContactTitle, Address, City, Region, PostalCode, Country, Phone, Fax FROM Customers WHERE CustomerID = " + $"'{id}'";
 
                 using var sdr = cmd.ExecuteReader();
                 if (!sdr.HasRows)
@@ -162,8 +162,15 @@ namespace NorthwindProject.Controllers
                 {
                     CustomerID = sdr.GetString(0),
                     CompanyName = sdr.GetString(1),
-                    ContactName = sdr.GetString(2),
-                    ContactTitle = sdr.GetString(3)
+                    ContactName = !sdr.IsDBNull(2) ? sdr.GetString(2) : string.Empty,
+                    ContactTitle = !sdr.IsDBNull(3) ? sdr.GetString(3) : string.Empty,
+                    Address = !sdr.IsDBNull(4) ? sdr.GetString(4) : string.Empty,
+                    City = !sdr.IsDBNull(5) ? sdr.GetString(5) : string.Empty,
+                    Region = !sdr.IsDBNull(6) ? sdr.GetString(6) : string.Empty,
+                    PostalCode = !sdr.IsDBNull(7) ? sdr.GetString(7) : string.Empty,
+                    Country = !sdr.IsDBNull(8) ? sdr.GetString(8) : string.Empty,
+                    Phone = !sdr.IsDBNull(9) ? sdr.GetString(9) : string.Empty,
+                    Fax = !sdr.IsDBNull(10) ? sdr.GetString(10) : string.Empty
                 };
             }
 
