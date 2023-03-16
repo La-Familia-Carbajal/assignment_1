@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NorthwindProject.Models;
+using NorthwindProject.Views.ViewModels;
 using NuGet.Protocol.Plugins;
 using System.Data;
 using System.Diagnostics;
@@ -143,7 +144,7 @@ namespace NorthwindProject.Controllers
 
         public async Task<IActionResult> CustomerOrders(string id)
         {
-            Customers customer = null;
+            CustomerOrderData customerOrderData = new CustomerOrderData();
 
             try
             {
@@ -153,12 +154,13 @@ namespace NorthwindProject.Controllers
                 cmd.CommandText = "SELECT CustomerID, CompanyName, ContactName, ContactTitle, Address, City, Region, PostalCode, Country, Phone, Fax FROM Customers WHERE CustomerID = " + $"'{id}'";
 
                 using var sdr = cmd.ExecuteReader();
+
                 if (!sdr.HasRows)
                     throw new Exception("No records found.");
 
                 await sdr.ReadAsync();
 
-                customer = new Customers
+                Customers customerInfo = new Customers
                 {
                     CustomerID = sdr.GetString(0),
                     CompanyName = sdr.GetString(1),
@@ -172,14 +174,44 @@ namespace NorthwindProject.Controllers
                     Phone = !sdr.IsDBNull(9) ? sdr.GetString(9) : string.Empty,
                     Fax = !sdr.IsDBNull(10) ? sdr.GetString(10) : string.Empty
                 };
-            }
 
+                customerOrderData.CustomerInfo = customerInfo;
+
+                sdr.Close();
+
+                List<Order> orders = new List<Order>();
+
+                cmd.CommandText = "SELECT OrderID, CustomerID, EmployeeId, OrderDate, RequiredDate, ShippedDate, ShipVia, Freight, ShipName, ShipAddress, ShipCity, ShipRegion, ShipPostalCode, ShipCountry FROM Orders WHERE CustomerID  = " + $"'{id}'";
+
+                using var sdrOrder = cmd.ExecuteReader();
+
+                if (!sdrOrder.HasRows)
+                    throw new Exception("No records found.");
+
+
+                while (await sdrOrder.ReadAsync())
+                {
+
+                    Order order = new Order
+                    {
+                        OrderID = sdrOrder.GetInt32(0),
+                        CustomerID = !sdrOrder.IsDBNull(1) ? sdrOrder.GetString(1) : string.Empty,
+                        EmployeeID = !sdrOrder.IsDBNull(2) ? sdrOrder.GetInt32(2) : -1,
+                        OrderDate = !sdrOrder.IsDBNull(3) ? sdrOrder.GetDateTime(3) : DateTime.Now
+                    };
+
+                    orders.Add(order);
+
+                }
+
+                customerOrderData.Order = orders;
+            }
             catch (Exception exc)
             {
                 _logger.LogError(exc.Message);
             }
 
-            return View(customer);
+            return View(customerOrderData);
         }
 
         #endregion

@@ -1,4 +1,4 @@
-﻿@model NorthwindProject.Models.Customers
+﻿@model NorthwindProject.Views.ViewModels.CustomerOrderData
 
 @{
     ViewData["Title"] = "Customer Orders";
@@ -9,69 +9,9 @@
 <br />
 
 <h1>Customer Information</h1>
-<h2>@Model.CompanyName</h2>
+<h2>@Model.CustomerInfo?.CompanyName</h2>
 
-<table class="table">
-    <tbody>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.CustomerID)
-            </th>
-            <td>@Model.CustomerID</td>
-        </tr>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ContactName)
-            </th>
-            <td>@Model.ContactName</td>
-        </tr>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ContactTitle)
-            </th>
-            <td>@Model.ContactTitle</td>
-        </tr>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Address)
-            </th>
-            <td>@Model.Address</td>
-        </tr>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.City)
-            </th>
-            <td>@Model.City</td>
-        </tr>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Region)
-            </th>
-            <td>@Model.Region</td>
-        </tr>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.PostalCode)
-            </th>
-            <td>@Model.PostalCode</td>
-        </tr>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Country)
-            </th>
-            <td>@Model.Country</td>
-        </tr>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Phone)
-            </th>
-            <td>@Model.Phone</td>
-        </tr>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Fax)
-            </th>
-            <td>@Model.Fax</td>
-        </tr>
-    </tbody>
-</table>
+@foreach (var item in Model.Order)
+{
+    <p>@Model.Order</p>
+}

@@ -1,10 +1,10 @@
-﻿namespace NorthwindProject.Models.ViewModels
+﻿namespace NorthwindProject.Models
 {
-    public class Orders
+    public class Order
     {
         public int OrderID { get; set; }
-        public string CustomerId { get; set; } = string.Empty;
-        public int EmployeeId { get; set; }
+        public string CustomerID { get; set; } = string.Empty;
+        public int EmployeeID { get; set; }
         public DateTime OrderDate { get; set; }
         public DateTime RequiredDate { get; set; }
         public DateTime ShippedDate { get; set; }
