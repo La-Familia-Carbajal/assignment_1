@@ -106,6 +106,7 @@ namespace NorthwindProject.Controllers
         #region Customers
         public async Task<IActionResult> Customers()
         {
+            //creating an empty customer list
             List<Customers> Customers = new List<Customers>();
 
             try
@@ -122,6 +123,7 @@ namespace NorthwindProject.Controllers
                 }
                 while (await sdr.ReadAsync())
                 {
+                    //creating a new customer using the information taken from DB
                     var customers = new Customers
                     {
                         CustomerID = sdr.GetString(0),
@@ -130,6 +132,7 @@ namespace NorthwindProject.Controllers
                         ContactTitle = sdr.GetString(3)
                     };
 
+                    //Adding new customer to the Customers list
                     Customers.Add(customers);
                 }
             }
@@ -151,6 +154,7 @@ namespace NorthwindProject.Controllers
                 using var conn = DbConnector.GetServiceConnection();
                 using var cmd = conn?.CreateCommand();
 
+                //getting the full customer information from the DB
                 cmd.CommandText = "SELECT CustomerID, CompanyName, ContactName, ContactTitle, Address, City, Region, PostalCode, Country, Phone, Fax FROM Customers WHERE CustomerID = " + $"'{id}'";
 
                 using var sdr = cmd.ExecuteReader();
@@ -160,6 +164,7 @@ namespace NorthwindProject.Controllers
 
                 await sdr.ReadAsync();
 
+                //Creating a new customer
                 Customers customerInfo = new Customers
                 {
                     CustomerID = sdr.GetString(0),
@@ -179,8 +184,10 @@ namespace NorthwindProject.Controllers
 
                 sdr.Close();
 
+                //Creating a new, empty order list
                 List<Order> orders = new List<Order>();
 
+                //pulling all order info from the DB
                 cmd.CommandText = "SELECT OrderID, CustomerID, EmployeeId, OrderDate, RequiredDate, ShippedDate, ShipVia, Freight, ShipName, ShipAddress, ShipCity, ShipRegion, ShipPostalCode, ShipCountry FROM Orders WHERE CustomerID  = " + $"'{id}'";
 
                 using var sdrOrder = cmd.ExecuteReader();
@@ -191,7 +198,7 @@ namespace NorthwindProject.Controllers
 
                 while (await sdrOrder.ReadAsync())
                 {
-
+                    //creating a new single order.  Looped to be able to grab all of the orders for the specified customer
                     Order order = new Order
                     {
                         OrderID = sdrOrder.GetInt32(0),
@@ -200,6 +207,7 @@ namespace NorthwindProject.Controllers
                         OrderDate = !sdrOrder.IsDBNull(3) ? sdrOrder.GetDateTime(3) : DateTime.Now
                     };
 
+                    //adding each order obtained to the order list
                     orders.Add(order);
 
                 }
