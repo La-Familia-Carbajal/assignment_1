@@ -26,33 +26,6 @@ namespace NorthwindProject.Controllers
         public async Task<IActionResult> Employees()
         {
             List<Employee> Employees = new List<Employee>();
-
-            try
-            {
-                using var conn = DbConnector.GetServiceConnection();
-                using var cmd = conn?.CreateCommand();
-
-                cmd.CommandText = "SELECT EmployeeID, FirstName, LastName FROM Employees ORDER BY LastName, FirstName";
-
-                using var sdr = cmd.ExecuteReader();
-                if (!sdr.HasRows)
-                    throw new Exception("No records found.");
-
-                while (await sdr.ReadAsync())
-                {
-                    var employee = new Employee
-                    {
-                        EmployeeID = sdr.GetInt32(0),
-                        FirstName = sdr.GetString(1),
-                        LastName = sdr.GetString(2)
-                    };
-                    Employees.Add(employee);
-                }
-            }
-            catch (Exception exc)
-            {
-                _logger.LogError(exc.Message);
-            }
             
             return View(Employees);        
         }
