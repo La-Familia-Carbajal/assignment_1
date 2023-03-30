@@ -1,33 +1,79 @@
-﻿@model IEnumerable<NorthwindProject.Models.CustomerOrders>
+﻿@model NorthwindProject.Views.ViewModels.CustomerOrderData
 
 @{
     ViewData["Title"] = "Customer Orders";
 }
+<a onclick="history.go(-1); return false;" href="#">Back to Customer List</a>
 
-<h1>Customer Orders</h1>
+<br />
+<br />
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.CompanyName)
-            </th>
-            <th>
-                Contact: @Html.DisplayNameFor(model => model.ContactName), @Html.DisplayNameFor(model => model.ContactTitle)
-            </th>
-        </tr>
-    </thead>
+<h1>Customer Information</h1>
+<h2>@Model.CustomerInfo?.CompanyName</h2>
+<table>
     <tbody>
-        @foreach (var item in Model)
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.CustomerInfo.CustomerID)</th>
+            <td>@Model.CustomerInfo.CustomerID</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.CustomerInfo.ContactName)</th>
+            <td>@Model.CustomerInfo.ContactName</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.CustomerInfo.ContactTitle)</th>
+            <td>@Model.CustomerInfo.ContactTitle</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.CustomerInfo.Address)</th>
+            <td>@Model.CustomerInfo.Address</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.CustomerInfo.City)</th>
+            <td>@Model.CustomerInfo.City</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.CustomerInfo.Region)</th>
+            <td>@Model.CustomerInfo.Region</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.CustomerInfo.PostalCode)</th>
+            <td>@Model.CustomerInfo.PostalCode</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.CustomerInfo.Country)</th>
+            <td>@Model.CustomerInfo.Country</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.CustomerInfo.Phone)</th>
+            <td>@Model.CustomerInfo.Phone</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.CustomerInfo.Fax)</th>
+            <td>@Model.CustomerInfo.Fax</td>
+        </tr>
+    </tbody>
+</table>
+<br />
+<h1>Orders</h1>
+<table>
+    <tbody>         
+        <tr>
+            <th>Order ID</th>
+            <th>Employee ID</th>
+            <th>Order Date</th>
+            <th>Required Date</th>
+            <th>Shipped Date</th>
+        </tr>
+        @foreach (var item in Model.Order)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CompanyName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ContactName), @Html.DisplayFor(modelItem => item.ContactTitle)
-                </td>
-            </tr>
-        }
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.OrderID)</td>
+            <td>@Html.DisplayFor(modelItem => item.EmployeeID)</td>
+            <td>@Html.DisplayFor(modelItem => item.OrderDate)</td>
+            <td>@Html.DisplayFor(modelItem => item.RequiredDate)</td>
+            <td>@Html.DisplayFor(modelItem => item.ShippedDate)</td>
+        </tr>
+    }
     </tbody>
 </table>

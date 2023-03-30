@@ -1,0 +1,21 @@
+﻿@model IEnumerable<NorthwindProject.Models.Customers>
+
+@{
+    ViewData["Title"] = "Customers";
+}
+
+<h1>Customers</h1>
+
+<table class="table">
+    <tbody>
+        @foreach (var item in Model)
+        {
+                    <tr>
+                        <td>
+                    @Html.ActionLink(item.CompanyName, "CustomerOrders", "Home", new {id = item.CustomerID})<br />
+                    @Html.DisplayNameFor(model => model.ContactName): @Html.DisplayFor(modelItem => item.ContactName), @Html.DisplayFor(modelItem => item.ContactTitle)
+                        </td>
+                    </tr>
+        }
+    </tbody>
+</table>
