@@ -1,0 +1,13 @@
+﻿@model NorthwindProject.Models.Employee
+
+@{
+    ViewData["Title"] = "Employee Info";
+}
+<a onclick="history.go(-1); return false;" href="#">Back to Employee List</a>
+
+<br />
+<br />
+
+<h1>Employee Information</h1>
+
+<h2>@Model.FirstName @Model.LastName</h2>
