@@ -11,3 +11,103 @@
 <h1>Employee Information</h1>
 
 <h2>@Model.FirstName @Model.LastName</h2>
+<table class="table">
+    <tbody>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeID)
+            </th>
+            <td>@Model.EmployeeID</td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TitleOfCourtesy)
+            </th>
+            <td>@Model.TitleOfCourtesy</td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <td>@Model.FirstName</td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <td>@Model.LastName</td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <td>@Model.Title</td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BirthDate)
+            </th>
+            <td>@Model.BirthDate</td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.HireDate)
+            </th>
+            <td>@Model.HireDate</td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <td>@Model.Address</td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.City)
+            </th>
+            <td>@Model.City</td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Region)
+            </th>
+            <td>@Model.Region</td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PostalCode)
+            </th>
+            <td>@Model.PostalCode</td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Country)
+            </th>
+            <td>@Model.Country</td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.HomePhone)
+            </th>
+            <td>@Model.HomePhone</td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Extension)
+            </th>
+            <td>@Model.Extension</td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Notes)
+            </th>
+            <td>@Model.Notes</td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ReportsTo)
+            </th>
+            <td>@Model.ReportsTo</td>
+        </tr>
+    </tbody>
+</table>

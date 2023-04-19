@@ -41,5 +41,36 @@ namespace NorthwindProject.Controllers
             // give box of EmployeeView records to front desk person
             return View(employees);
         }
+
+        public async Task<IActionResult> EmployeeInfo(int id)
+        {
+            //Create new, empty employee document
+            EmployeeView employee = null;
+
+            //fill out employee document
+            try
+            {
+                //grab the box of employee information
+                var employeeService = new EmployeeDataService();
+
+                //dig in box find specific employee
+                var employeeData = employeeService.GetEmployeeById(id);
+
+                //copy all necessary information to document
+                employee = new EmployeeView()
+                {
+                    EmployeeID = employee.EmployeeID
+                };
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            //place the single employee document in the box created previously
+            return View(employee);
+
+        }
     }
 }
