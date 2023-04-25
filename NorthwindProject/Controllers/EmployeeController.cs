@@ -34,7 +34,8 @@ namespace NorthwindProject.Controllers
                     employees.Add(viewEmployee);
                 }
             }
-            catch(Exception e) {
+            catch(Exception e) 
+            {
                 Console.WriteLine(e);
             }
 
@@ -45,7 +46,7 @@ namespace NorthwindProject.Controllers
         public async Task<IActionResult> EmployeeInfo(int id)
         {
             //Create new, empty employee document
-            EmployeeView employee = null;
+            EmployeeView employee = new EmployeeView();
 
             //fill out employee document
             try
@@ -54,13 +55,13 @@ namespace NorthwindProject.Controllers
                 var employeeService = new EmployeeDataService();
 
                 //dig in box find specific employee
-                var employeeData = employeeService.GetEmployeeById(id);
+                var employeeData = await employeeService.GetEmployeeById(id);
 
                 //copy all necessary information to document
-                employee = new EmployeeView()
-                {
-                    EmployeeID = employee.EmployeeID
-                };
+
+                employee.EmployeeID = employeeData.EmployeeID;
+                employee.FirstName = employeeData.FirstName;
+                employee.LastName = employeeData.LastName;
             }
 
             catch (Exception e)

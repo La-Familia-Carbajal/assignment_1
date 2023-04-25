@@ -5,8 +5,6 @@ namespace NorthwindProject.Services
 {
     public class EmployeeDataService
     {
-        public EmployeeDataService() { }
-
         public async Task<List<Employee>> GetEmployees()
         {
             List<Employee> employees = new();
