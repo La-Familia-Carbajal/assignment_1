@@ -1,5 +1,4 @@
 ﻿using NorthwindProject.Models;
-using System.Data;
 
 namespace NorthwindProject.Services
 {
