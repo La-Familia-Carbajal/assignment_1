@@ -2,6 +2,12 @@
 using NorthwindProject.Models;
 using NorthwindProject.Services;
 using NorthwindProject.Views.ViewModels;
+using NuGet.Packaging.Signing;
+using static Azure.Core.HttpHeader;
+using System.Diagnostics.Metrics;
+using System.Drawing;
+using System.Net;
+using System.Drawing.Imaging;
 
 namespace NorthwindProject.Controllers
 {
@@ -43,7 +49,7 @@ namespace NorthwindProject.Controllers
             return View(employees);
         }
 
-        public async Task<IActionResult> EmployeeInfo(int id)
+        public async Task<IActionResult> EmployeeInfo(int employeeId)
         {
             //Create new, empty employee document
             EmployeeView employee = new EmployeeView();
@@ -55,13 +61,32 @@ namespace NorthwindProject.Controllers
                 var employeeService = new EmployeeDataService();
 
                 //dig in box find specific employee
-                var employeeData = await employeeService.GetEmployeeById(id);
+                var employeeData = await employeeService.GetEmployeeById(employeeId);
 
                 //copy all necessary information to document
+                if (employeeData != null)
+                {
+                    employee = new EmployeeView
+                    {
+                        EmployeeID = employeeData.EmployeeID,
+                        FirstName = employeeData.FirstName,
+                        LastName = employeeData.LastName,
+                        Title = employeeData.Title,
+                        TitleOfCourtesy = employeeData.TitleOfCourtesy,
+                        BirthDate = employeeData.BirthDate,
+                        HireDate = employeeData.HireDate,
+                        Address = employeeData.Address,
+                        City = employeeData.City,
+                        Region = employeeData.Region,
+                        PostalCode = employeeData.PostalCode,
+                        Country = employeeData.Country,
+                        HomePhone = employeeData.HomePhone,
+                        Extension = employeeData.Extension,
+                        Notes = employeeData.Notes,
+                        ReportsTo = employeeData.ReportsTo
+                    };
 
-                employee.EmployeeID = employeeData.EmployeeID;
-                employee.FirstName = employeeData.FirstName;
-                employee.LastName = employeeData.LastName;
+                }
             }
 
             catch (Exception e)

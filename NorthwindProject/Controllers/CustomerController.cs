@@ -15,7 +15,7 @@ namespace NorthwindProject.Controllers
             {
                 var customerService = new CustomerDataService();
 
-                var dataCustomers = await customerService.GetCustomers();
+                var dataCustomers = await customerService.GetCustomerList();
 
                 foreach (var dataCustomer in dataCustomers)
                 {
@@ -36,40 +36,39 @@ namespace NorthwindProject.Controllers
             return View(customers);
         }
 
-        public async Task<IActionResult> CustomerOrder(string id)
+        public async Task<IActionResult> CustomerInfo(string customerId)
         {
-            //Create a new Doc for Specific Customer
-            CustomerOrderData customerOrders = new CustomerOrderData();
+            CustomerView customer = new CustomerView();
 
-            //Call customer manager person
-            var customerService = new CustomerDataService();
-
-            //Grab the specific customer information from manager person
-            var customerData = await customerService.GetCustomerOrder(id);
-
-            //Take the specific customer information to the office and find specific information needed
-            if(customerData != null)
+            try
             {
-                CustomerView customerInfo = new CustomerView()
+                var customerService = new CustomerDataService();
+
+                var customerData = await customerService.GetCustomerInfo(customerId);
+
+                if(customerData != null)
                 {
-                    CustomerID = customerData.CustomerInfo.CustomerID,
-                    CompanyName = customerData.CustomerInfo.CompanyName,
-                    ContactName = customerData.CustomerInfo.ContactName,
-                    ContactTitle = customerData.CustomerInfo.ContactTitle,
-                    Address = customerData.CustomerInfo.Address,
-                    City = customerData.CustomerInfo.City,
-                    Region = customerData.CustomerInfo.Region,
-                    PostalCode = customerData.CustomerInfo.PostalCode,
-                    Country = customerData.CustomerInfo.Country,
-                    Phone = customerData.CustomerInfo.Phone,
-                    Fax = customerData.CustomerInfo.Fax
-
-                };
-                //copy down the needed information
-            }           
-
-            //Give the final document to the front desk/view
-            return View(customerOrders);
+                    customer = new CustomerView
+                    {
+                        CustomerID = customerData.CustomerID,
+                        CompanyName = customerData.CompanyName,
+                        ContactName = customerData.ContactName,
+                        ContactTitle = customerData.ContactTitle,
+                        Address = customerData.Address,
+                        City = customerData.City,
+                        Region = customerData.Region,
+                        PostalCode = customerData.PostalCode,
+                        Country = customerData.Country,
+                        Phone = customerData.Phone,
+                        Fax = customerData.Fax
+                    };
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            return View(customer);
         }
     }
 }

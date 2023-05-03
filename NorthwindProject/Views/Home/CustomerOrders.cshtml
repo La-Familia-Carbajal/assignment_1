@@ -1,4 +1,4 @@
-﻿@model NorthwindProject.Views.ViewModels.CustomerOrderData
+﻿@model NorthwindProject.Views.ViewModels.CustomerView
 
 @{
     ViewData["Title"] = "Customer Orders";
@@ -9,53 +9,53 @@
 <br />
 
 <h1>Customer Information</h1>
-<h2>@Model.CustomerInfo?.CompanyName</h2>
-<table>
+<h2>@Model.CompanyName</h2>
+<table class="table">
     <tbody>
         <tr>
-            <th>@Html.DisplayNameFor(model => model.CustomerInfo.CustomerID)</th>
-            <td>@Model.CustomerInfo.CustomerID</td>
+            <th>@Html.DisplayNameFor(model => model.CustomerID)</th>
+            <td>@Model.CustomerID</td>
         </tr>
         <tr>
-            <th>@Html.DisplayNameFor(model => model.CustomerInfo.ContactName)</th>
-            <td>@Model.CustomerInfo.ContactName</td>
+            <th>@Html.DisplayNameFor(model => model.ContactName)</th>
+            <td>@Model.ContactName</td>
         </tr>
         <tr>
-            <th>@Html.DisplayNameFor(model => model.CustomerInfo.ContactTitle)</th>
-            <td>@Model.CustomerInfo.ContactTitle</td>
+            <th>@Html.DisplayNameFor(model => model.ContactTitle)</th>
+            <td>@Model.ContactTitle</td>
         </tr>
         <tr>
-            <th>@Html.DisplayNameFor(model => model.CustomerInfo.Address)</th>
-            <td>@Model.CustomerInfo.Address</td>
+            <th>@Html.DisplayNameFor(model => model.Address)</th>
+            <td>@Model.Address</td>
         </tr>
         <tr>
-            <th>@Html.DisplayNameFor(model => model.CustomerInfo.City)</th>
-            <td>@Model.CustomerInfo.City</td>
+            <th>@Html.DisplayNameFor(model => model.City)</th>
+            <td>@Model.City</td>
         </tr>
         <tr>
-            <th>@Html.DisplayNameFor(model => model.CustomerInfo.Region)</th>
-            <td>@Model.CustomerInfo.Region</td>
+            <th>@Html.DisplayNameFor(model => model.Region)</th>
+            <td>@Model.Region</td>
         </tr>
         <tr>
-            <th>@Html.DisplayNameFor(model => model.CustomerInfo.PostalCode)</th>
-            <td>@Model.CustomerInfo.PostalCode</td>
+            <th>@Html.DisplayNameFor(model => model.PostalCode)</th>
+            <td>@Model.PostalCode</td>
         </tr>
         <tr>
-            <th>@Html.DisplayNameFor(model => model.CustomerInfo.Country)</th>
-            <td>@Model.CustomerInfo.Country</td>
+            <th>@Html.DisplayNameFor(model => model.Country)</th>
+            <td>@Model.Country</td>
         </tr>
         <tr>
-            <th>@Html.DisplayNameFor(model => model.CustomerInfo.Phone)</th>
-            <td>@Model.CustomerInfo.Phone</td>
+            <th>@Html.DisplayNameFor(model => model.Phone)</th>
+            <td>@Model.Phone</td>
         </tr>
         <tr>
-            <th>@Html.DisplayNameFor(model => model.CustomerInfo.Fax)</th>
-            <td>@Model.CustomerInfo.Fax</td>
+            <th>@Html.DisplayNameFor(model => model.Fax)</th>
+            <td>@Model.Fax</td>
         </tr>
     </tbody>
 </table>
 <br />
-<h1>Orders</h1>
+@*<h1>Orders</h1>
 <table>
     <tbody>         
         <tr>
@@ -76,4 +76,4 @@
         </tr>
     }
     </tbody>
-</table>
+</table>*@

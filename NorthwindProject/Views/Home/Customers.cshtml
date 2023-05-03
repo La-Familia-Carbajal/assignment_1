@@ -1,4 +1,4 @@
-﻿@model IEnumerable<NorthwindProject.Models.Customers>
+﻿@model IEnumerable<NorthwindProject.Models.Customer>
 
 @{
     ViewData["Title"] = "Customers";
@@ -12,8 +12,8 @@
         {
                     <tr>
                         <td>
-                    @Html.ActionLink(item.CompanyName, "CustomerOrders", "Home", new {id = item.CustomerID})<br />
-                    @Html.DisplayNameFor(model => model.ContactName): @Html.DisplayFor(modelItem => item.ContactName), @Html.DisplayFor(modelItem => item.ContactTitle)
+                            @Html.ActionLink(item.CompanyName, "CustomerOrders", "Customer", new {id = item.CustomerID})><br />
+                            @Html.DisplayNameFor(model => model.ContactName): @Html.DisplayFor(modelItem => item.ContactName), @Html.DisplayFor(modelItem => item.ContactTitle)
                         </td>
                     </tr>
         }

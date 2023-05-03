@@ -35,21 +35,25 @@ namespace NorthwindProject.Services
             return employees;
         }
 
-        public async Task<Employee> GetEmployeeById(int id)
+        public async Task<Employee> GetEmployeeById(int employeeId)
         {
-            Employee employee = null;
+            //create a new specific employee
+            Employee employee = new();
 
+            //open the database
             using var conn = DbConnector.GetServiceConnection();
             using var cmd = conn?.CreateCommand();
 
             if (cmd != null)
             {
-                cmd.CommandText = "SELECT EmployeeID, FirstName, LastName, Title, TitleOfCourtesy, BirthDate, HireDate, Address, City, Region, PostalCode, Country, HomePhone, Extension, Notes, ReportsTo FROM Employees WHERE EmployeeID = " + id;
+                //grab the information about the employee from the database
+                cmd.CommandText = "SELECT EmployeeID, FirstName, LastName, Title, TitleOfCourtesy, BirthDate, HireDate, Address, City, Region, PostalCode, Country, HomePhone, Extension, Notes, ReportsTo FROM Employees WHERE EmployeeID = " + employeeId;
 
                 using var sdr = cmd.ExecuteReader();
                 if (!sdr.HasRows)
                     throw new Exception("No records found.");
 
+                //assign the information a new Employee
                 while (await sdr.ReadAsync())
                 {
                     employee = new Employee
@@ -71,6 +75,7 @@ namespace NorthwindProject.Services
                         Notes = sdr.GetString(14),
                         ReportsTo = sdr.GetInt32(15)
                     };
+
                 }
             }
             return employee;

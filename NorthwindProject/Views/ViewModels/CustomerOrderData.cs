@@ -4,7 +4,7 @@ namespace NorthwindProject.Views.ViewModels
 {
     public class CustomerOrderData
     {
-        public IEnumerable<Order>? Order { get; set; } = Enumerable.Empty<Order>();
-        public Customers? CustomerInfo { get; set; } = new Customers();
+        public IEnumerable<OrderView>? Order { get; set; } = Enumerable.Empty<OrderView>();
+        public CustomerView? CustomerInfo { get; set; } = new CustomerView();
     }
 }
