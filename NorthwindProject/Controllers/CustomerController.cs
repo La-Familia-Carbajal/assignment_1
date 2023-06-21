@@ -36,9 +36,9 @@ namespace NorthwindProject.Controllers
             return View(customers);
         }
 
-        public async Task<IActionResult> CustomerInfo(string customerId)
+        public async Task<IActionResult> CustomerOrders(string customerId)
         {
-            CustomerView customer = new CustomerView();
+            Customer customer = new Customer();
 
             try
             {
@@ -48,7 +48,7 @@ namespace NorthwindProject.Controllers
 
                 if(customerData != null)
                 {
-                    customer = new CustomerView
+                    customer = new Customer
                     {
                         CustomerID = customerData.CustomerID,
                         CompanyName = customerData.CompanyName,
